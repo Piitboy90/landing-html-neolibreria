@@ -465,3 +465,49 @@ body {
 .site-footer__link:hover {
   text-decoration: underline;
 }
+
+/*----Adaptación a versión movil----*/
+
+@media (max-width: 768px) {
+
+  .hero__layout {
+    flex-direction: column;
+  }
+
+  .vision-layout {
+    flex-direction: column;
+  }
+
+  .contact-layout {
+    flex-direction: column;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-nav__list {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .hero__title {
+    font-size: 28px;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+}
