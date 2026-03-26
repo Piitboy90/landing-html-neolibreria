@@ -4,8 +4,83 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+/*---@MEDIA QUERY MOVIL----*/
+    
+    @media (max-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
+    @media (max-width: 768px) {
+
+  .hero__layout,
+  .vision-layout,
+  .contact-layout {
+    flex-direction: column;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__title {
+    font-size: 28px;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main-nav__list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+    
+}
+/*---!ROOT PARA COLORES, TIPOGRAFÍA, ESPACIADOS, TRANSICIONES Y SOMBRAS----*/
+
+:root {
+  /* Colores */
+  --color-primary: #6c63ff;
+  --color-primary-dark: #5a52d5;
+  --color-dark: #1a1a2e;
+  --color-dark-deep: #0f0f1a;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-bg: #f1f1f3;
+  --color-bg-alt: #e8e8ec;
+  --color-white: #ffffff;
+
+  /* Tipografía */
+  --font-family: inter, sans-serif;
+  --line-height-base: 1.6;
+
+  /* Espaciados */
+  --section-padding: 60px;
+  --card-padding: 30px;
+  --border-radius: 8px;
+
+  /* Sombras */
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+  /* Transiciones */
+  --transition-base: 0.3s ease;
+}
 /* MEJORA F: scroll-behavior: smooth
    Hace que al hacer clic en los enlaces de navegación (#hero, #rutas, etc.)
    el navegador se desplace suavemente en vez de saltar de golpe. */
@@ -14,10 +89,10 @@ html {
 }
 
 body {
-    font-family: inter, sans-serif;
-    line-height: 1.6;  /* BUG 1 CORREGIDO: era 1,6 (coma) → ahora 1.6 (punto) */
-    background-color: #f1f1f3;
-    color: #333333;  /* BUG 2 CORREGIDO: faltaba el punto y coma */
+    font-family: var(--font-family);
+    line-height: var(--line-height-base);
+    background-color: var(--color-bg);
+    color: var(--color-text);  /* BUG 2 CORREGIDO: faltaba el punto y coma */
 }
 
 /* ----Bloque 2: Container y layout global.----*/
@@ -33,13 +108,13 @@ body {
 }
 
 .section--alt {
-  background-color: #e8e8ec;
+  background-color: var(--color-bg-alt);
 }
 
 /*----Bloque 3: Header.----*/
 
 .site-header {
-  background-color: #0f0f1a;
+  background-color: var(--color-dark-deep);
   padding: 15px 0;
 }
 
@@ -78,7 +153,7 @@ body {
 /*----Bloque 4: Hero.----*/
 
 .hero {
-  background: linear-gradient(135deg, #1a1a2e, #6c63ff);
+  background: linear-gradient(135deg, var(--color-dark), var(--color-primary));
   color: white;
   padding: 80px 0;
 }
@@ -147,7 +222,7 @@ body {
 
 .info-card__list li::before {
   content: "●";
-  color: #6c63ff;
+  color: var(--color-primary);
   margin-right: 8px;
   font-size: 10px;
   vertical-align: middle;
@@ -169,7 +244,7 @@ body {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #6c63ff;
+  color: var(--color-primary);
   margin-bottom: 10px;
   font-weight: 600;
 }
@@ -178,12 +253,12 @@ body {
   font-size: 30px;
   line-height: 1.2;
   margin-bottom: 15px;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .section-heading__text {
   font-size: 16px;
-  color: #666666;
+  color: var(--color-text-light);
 }
 
 /*----Bloque 6: Botones.----*/
@@ -207,12 +282,12 @@ body {
 }
 
 .button--primary {
-  background-color: #6c63ff;
+  background-color: var(--color-primary);
   color: white;
 }
 
 .button--primary:hover {
-  background-color: #5a52d5;
+  background-color: var(--color-primary-dark);
 }
 
 .button--secondary {
@@ -223,7 +298,7 @@ body {
 
 .button--secondary:hover {
   background-color: white;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 /*----Bloque 7: Feature Cards (sección Propuesta)----*/
@@ -237,27 +312,27 @@ body {
 /* MEJORA B: Hover en tarjetas feature
    translateY(-4px) sube la tarjeta 4px y la sombra más grande da sensación de "elevación". */
 .feature-card {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-base);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
 }
 
 .feature-card__title {
   font-size: 20px;
   margin-bottom: 12px;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .feature-card__text {
   font-size: 15px;
-  color: #666666;
+  color: var(--color-text-light);
 }
 
 /*----Bloque 8: Path Cards (sección Rutas)----*/
@@ -270,28 +345,28 @@ body {
 
 /* MEJORA B: Hover en tarjetas path (mismo principio que feature-card) */
 .path-card {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #6c63ff;
+  box-shadow: var(--shadow-base);
+  border-left: 4px solid var(--color-primary);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .path-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
 }
 
 .path-card__title {
   font-size: 20px;
   margin-bottom: 12px;
-  color: #1a1a2e;
+  color: var(--color-text-light);
 }
 
 .path-card__text {
   font-size: 15px;
-  color: #666666;
+  color: var(--color-text-light);
 }
 
 /*----Bloque 9: Process Steps (sección Método).----*/
@@ -306,10 +381,10 @@ body {
 
 /* MEJORA B: Hover sutil en pasos del proceso */
 .process-step {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 25px 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-base);
   display: flex;
   gap: 20px;
   align-items: flex-start;
@@ -318,25 +393,25 @@ body {
 
 .process-step:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
 }
 
 .process-step__number {
   font-size: 32px;
   font-weight: 700;
-  color: #6c63ff;
+  color: var(--color-primary);
   line-height: 1;
 }
 
 .process-step__title {
   font-size: 18px;
   margin-bottom: 6px;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .process-step__text {
   font-size: 15px;
-  color: #666666;
+  color: var(--color-text-light);
 }
 
 /*----Bloque 10: Visión + Quote.----*/
@@ -357,16 +432,16 @@ body {
 
 .vision-text {
   font-size: 16px;
-  color: #666666;
+  color: var(--color-text-light);
   margin-bottom: 15px;
 }
 
 .quote-card {
-  background-color: #1a1a2e;
+  background-color: var(--color-dark);
   color: white;
   padding: 30px;
   border-radius: 10px;
-  border-left: 4px solid #6c63ff;
+  border-left: 4px solid var(--color-primary);
 }
 
 .quote-card__text {
@@ -378,7 +453,7 @@ body {
 /*----Bloque 11: Callout.----*/
 
 .callout__box {
-  background-color: #1a1a2e;
+  background-color: var(--color-dark);
   color: white;
   text-align: center;
   padding: 50px 40px;
@@ -429,26 +504,26 @@ body {
 }
 
 .contact-card {
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-base);
 }
 
 .contact-card__title {
   font-size: 20px;
   margin-bottom: 12px;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .contact-card__text {
   font-size: 15px;
-  color: #666666;
+  color: var(--color-text-light);
   margin-bottom: 10px;
 }
 
 .contact-card__text a {
-  color: #6c63ff;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -467,17 +542,17 @@ body {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #1a1a2e;
+  color: var(--color-dark);
 }
 
 .form__control {
   width: 100%;
   padding: 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-bg-alt);
   border-radius: 5px;
   font-size: 16px;
   font-family: inherit;
-  background-color: #ffffff;
+  background-color:var(--color-white);
 }
 
 /* MEJORA E: Focus mejorado para accesibilidad
@@ -485,13 +560,13 @@ body {
    que navegan con teclado. outline: none + box-shadow es un patrón muy usado. */
 .form__control:focus {
   outline: none;
-  border-color: #6c63ff;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
 }
 
 /* Transición suave al entrar/salir del focus */
 .form__control {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color var(--transition-base), box-shadow 0.3s ease;
 }
 
 .form__control--textarea {
@@ -501,7 +576,7 @@ body {
 /*----Último bloque. Bloque 13: Footer.*/
 
 .site-footer {
-  background-color: #0f0f1a;
+  background-color: var(--color-dark-deep);
   padding: 20px 0;
   margin-top: 0;
 }
@@ -519,7 +594,7 @@ body {
 
 /* MEJORA A: Transición suave en el link del footer */
 .site-footer__link {
-  color: #6c63ff;
+  color: var(--color-primary);
   text-decoration: none;
   font-size: 14px;
   transition: opacity 0.3s ease;
