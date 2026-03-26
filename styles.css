@@ -6,21 +6,26 @@
     box-sizing: border-box;
 }
 
+/* MEJORA F: scroll-behavior: smooth
+   Hace que al hacer clic en los enlaces de navegación (#hero, #rutas, etc.)
+   el navegador se desplace suavemente en vez de saltar de golpe. */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: inter, sans-serif;
-    line-height: 1,6;
+    line-height: 1.6;  /* BUG 1 CORREGIDO: era 1,6 (coma) → ahora 1.6 (punto) */
     background-color: #f1f1f3;
-    color: #333333
+    color: #333333;  /* BUG 2 CORREGIDO: faltaba el punto y coma */
 }
 
 /* ----Bloque 2: Container y layout global.----*/
 
 .container {
-  max-width: 1200px, 100%;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
-    box-sizing: border-box;
-    
 }
 
 .section {
@@ -57,10 +62,17 @@ body {
   list-style: none;
 }
 
+/* MEJORA C: Hover en links de navegación
+   opacity + transition da feedback visual al usuario de que el link es clickeable. */
 .main-nav__link {
   color: white;
   text-decoration: none;
   font-size: 15px;
+  transition: opacity 0.3s ease;
+}
+
+.main-nav__link:hover {
+  opacity: 0.75;
 }
 
 /*----Bloque 4: Hero.----*/
@@ -122,12 +134,23 @@ body {
   margin-bottom: 15px;
 }
 
+/* MEJORA D: Indicadores visuales en la lista
+   ::before crea un pseudo-elemento antes de cada <li>.
+   Usamos un círculo unicode (●) con el color de la marca para dar estructura visual. */
 .info-card__list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-size: 15px;
+}
+
+.info-card__list li::before {
+  content: "●";
+  color: #6c63ff;
+  margin-right: 8px;
+  font-size: 10px;
+  vertical-align: middle;
 }
 
 .section-heading {
@@ -165,6 +188,8 @@ body {
 
 /*----Bloque 6: Botones.----*/
 
+/* MEJORA A: Transiciones suaves en botones
+   transition hace que el cambio hover no sea instantáneo sino animado (0.3s). */
 .button {
   display: inline-block;
   padding: 12px 24px;
@@ -174,6 +199,11 @@ body {
   font-weight: 600;
   cursor: pointer;
   border: none;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
 }
 
 .button--primary {
@@ -204,11 +234,19 @@ body {
   gap: 25px;
 }
 
+/* MEJORA B: Hover en tarjetas feature
+   translateY(-4px) sube la tarjeta 4px y la sombra más grande da sensación de "elevación". */
 .feature-card {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .feature-card__title {
@@ -230,12 +268,19 @@ body {
   gap: 25px;
 }
 
+/* MEJORA B: Hover en tarjetas path (mismo principio que feature-card) */
 .path-card {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-left: 4px solid #6c63ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.path-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .path-card__title {
@@ -259,6 +304,7 @@ body {
   margin: 0 auto;
 }
 
+/* MEJORA B: Hover sutil en pasos del proceso */
 .process-step {
   background-color: #ffffff;
   padding: 25px 30px;
@@ -267,6 +313,12 @@ body {
   display: flex;
   gap: 20px;
   align-items: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .process-step__number {
@@ -428,9 +480,18 @@ body {
   background-color: #ffffff;
 }
 
+/* MEJORA E: Focus mejorado para accesibilidad
+   box-shadow crea un "halo" alrededor del campo activo, visible para usuarios
+   que navegan con teclado. outline: none + box-shadow es un patrón muy usado. */
 .form__control:focus {
   outline: none;
   border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+/* Transición suave al entrar/salir del focus */
+.form__control {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form__control--textarea {
@@ -456,58 +517,15 @@ body {
   font-size: 14px;
 }
 
+/* MEJORA A: Transición suave en el link del footer */
 .site-footer__link {
   color: #6c63ff;
   text-decoration: none;
   font-size: 14px;
+  transition: opacity 0.3s ease;
 }
 
 .site-footer__link:hover {
   text-decoration: underline;
-}
-
-/*----Adaptación a versión movil----*/
-
-@media (max-width: 768px) {
-
-  .hero__layout {
-    flex-direction: column;
-  }
-
-  .vision-layout {
-    flex-direction: column;
-  }
-
-  .contact-layout {
-    flex-direction: column;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .path-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .main-nav__list {
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  .hero__title {
-    font-size: 28px;
-  }
-
-  .site-header__inner {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .site-footer__inner {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-
+  opacity: 0.8;
 }
